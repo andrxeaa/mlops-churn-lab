@@ -38,5 +38,7 @@ los detecta. Esta ficha es el registro de esas decisiones: se versiona junto al 
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
-| | Umbral de decisión elegido por costo, no 0.5 | Un FN cuesta el doble que un FP |
-| | El modelo se selecciona por F1 de validación cruzada | Test queda reservado para la evaluación final |
+| 2026-11-15 | Umbral de decisión elegido por costo, no 0.5 | Un FN cuesta el doble que un FP |
+| 2026-11-15 | El modelo se selecciona por F1 de validación cruzada | Test queda reservado para la evaluación final |
+| 2026-11-15 | Agregar validación de duplicados completos al contrato de datos | Cumplir reto opcional 3 para evitar datos redundantes en el entrenamiento |
+| 2026-11-15 | Agregar `contract_type` a los segmentos evaluados (`quality_gate.slices`) | Cumplir reto opcional 2 para asegurar que el modelo funciona bien sin importar el tipo de contrato |

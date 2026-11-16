@@ -73,4 +73,4 @@ def client():
         import app.main as app_module
         from fastapi.testclient import TestClient
 
-        yield TestClient(app_module.app)
+    yield TestClient(app_module.app)
