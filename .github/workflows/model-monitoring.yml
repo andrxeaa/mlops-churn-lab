@@ -42,7 +42,10 @@ jobs:
             exit 1
           fi
           echo "Usando artefactos de la corrida $RUN_ID"
-          gh run download "$RUN_ID" --name production-artifacts --dir .
+          
+          # Descargar a carpeta temporal para evitar colisiones "file exists"
+          gh run download "$RUN_ID" --name production-artifacts --dir temp_artifacts
+          cp -r temp_artifacts/* .
 
       - name: Ejecutar monitor
         id: monitor
