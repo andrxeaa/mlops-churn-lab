@@ -116,3 +116,8 @@ Al agregar la variable `contract_type` a `quality_gate.slices`, se evaluó la eq
 * **Resultado:** Se detectó una brecha de recall (*recall gap*) de **0.50 (50%)**, provocando que el modelo **fallara** el quality gate original (que exigía `<= 0.25`).
 * **Análisis:** El modelo acierta muy bien en los contratos "Month-to-Month" (donde ocurre la mayoría del churn y hay más datos), pero falla al predecir el comportamiento de los clientes con contratos anuales o bianuales porque la muestra de abandonos en esos grupos es mínima.
 * **Solución propuesta:** Como solución inmediata para no bloquear el paso a producción (dado que el modelo globalmente sigue ahorrando dinero), se incrementó temporalmente el límite `max_recall_gap` a **0.55** en `configs/churn.yaml`. Como solución a largo plazo, propongo recolectar más datos históricos de contratos largos o probar entrenar un modelo específico (segmentado) solo para contratos anuales/bianuales.
+
+#### 3. Nuevo Check en el Contrato de Datos (Duplicados Completos)
+Se agregó un nuevo control de calidad en la fase de entendimiento de datos para asegurar que el dataset no contenga clientes duplicados.
+* **Implementación en el código:** Se agregó la validación `df.duplicated().sum() == 0` dentro de `src/validate_data.py` bajo el nombre del check `no_full_duplicates`.
+* **Test automatizado:** Se creó la prueba unitaria `test_full_duplicates_fails` en `tests/test_data_contract.py`. Esta prueba simula la inyección de una fila duplicada (concatenando la primera fila al final del dataframe) y verifica mediante un assert que el check falle como es esperado. Ambos scripts pasaron exitosamente en el job *Tests* de GitHub Actions.
