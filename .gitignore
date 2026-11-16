@@ -92,4 +92,4 @@ docs/slides_MLOps_Churn.html
 data/train.csv
 data/test.csv
 reports/data_validation.json
-reports/evaluation_report.json
+reports/evaluation_report.jsonlogs/
